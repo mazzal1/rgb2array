@@ -7,10 +7,11 @@ def main(filepaths: list[str]):
     for filepath in filepaths:
         img = Image.open(filepath).convert('L')
         matrix = np.array(img, np.float32)
-        np.set_printoptions(threshold=np.inf, formatter={
-                            'all': lambda x: f'{x:.2f}'})
+        # np.set_printoptions(threshold=np.inf, formatter={
+        #                     'all': lambda x: f'{x:.2f}'})
+        np.set_printoptions(precision=2, floatmode='fixed', threshold=np.inf)
         with open('result.txt', 'w') as file:
-            file.writelines(str(matrix.flatten()))
+            file.writelines(np.array2string(matrix.flatten(), separator=','))
 
 
 if __name__ == '__main__':
